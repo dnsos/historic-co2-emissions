@@ -38,6 +38,9 @@ window.onload = () => {
     let a = timespanStart - data.startYear;
     let b = timespanEnd - data.startYear - 1;
 
+
+    /* ----------------------------------------------------
+    -- PREPARE DATA */
     let selectedTimespan = data.data.splice(a, b - a + 1);
 
     for (let location of selectedLocations) {
@@ -127,12 +130,19 @@ window.onload = () => {
       .append("g");
 
     cellWrapper.on("mouseover", (d, i) => {
+      let displayedDeviation = (d, i) => {
+        if (isNaN(d.deviation) || d.deviation == Number.POSITIVE_INFINITY || d.deviation == Number.NEGATIVE_INFINITY || i == 0) {
+          return "-";
+        } else {
+          return d.deviation;
+        }
+      }
        tooltip.transition()
          .duration(200)
          .style("opacity", 1);
        tooltip.html(() => {
          //console.log("Test historical event:", selectedLocations[0].events[0]);
-         return "<p><span>" + (timespanStart + i) + "</span></p><p>Emissions: <span>" + d.value + "</span> GtC</p><p>Deviation: <span>" + d.deviation + "</span> %";
+         return "<p><span>" + (timespanStart + i) + "</span></p><p>Emissions: <span>" + d.value + "</span> GtC</p><p>Deviation: <span>" + displayedDeviation(d, i) + "</span> %";
        })
          .style("left", (d3.event.pageX) + 20 + "px")
          .style("top", (d3.event.pageY - 80) + "px");
@@ -158,43 +168,42 @@ window.onload = () => {
         return color(d.value);
       });
 
-  d3.select("#toggleDeviation").on("click", () => {
-    d3.selectAll("rect")
-      .transition()
-      .duration(500)
-      .attr("y", cellHeight / 2)
-      .attr("height", (d) => {
-        if (isNaN(d.deviation)) {
-          return 0;
-        } else {
-          if (isFinite(d.deviation) && (d.deviation >= -100 && d.deviation <= 100)) {
-            return Math.abs(d.deviation) / 2;
+    d3.select("#toggleDeviation").on("click", () => {
+      d3.selectAll("rect")
+        .transition()
+        .duration(500)
+        .attr("y", cellHeight / 2)
+        .attr("height", (d) => {
+          if (isNaN(d.deviation) || d.deviation == Number.POSITIVE_INFINITY || d.deviation == Number.NEGATIVE_INFINITY) {
+            return 0;
           } else {
-            return cellHeight + 40;
+            if (isFinite(d.deviation) && (d.deviation >= -100 && d.deviation <= 100)) {
+              return Math.abs(d.deviation) / 2;
+            } else {
+              return cellHeight + 40;
+            }
           }
-        }
-      })
-      .attr("transform", (d) => {
-        if (d.deviation > 0) {
-          if (d.deviation >= 100) {
-            return "translate(0,-" + (cellHeight + 40) + ")";
+        })
+        .attr("transform", (d) => {
+          if (d.deviation > 0) {
+            if (d.deviation >= 100) {
+              return "translate(0,-" + (cellHeight + 40) + ")";
+            } else {
+              return "translate(0,-" + Math.abs(d.deviation) / 2 + ")";
+            }
           } else {
-            return "translate(0,-" + Math.abs(d.deviation) / 2 + ")";
+            return "translate(0,0)";
           }
-        } else {
-          return "translate(0,0)";
-        }
-      })
-      .style("fill", (d) => {
-        if (d.deviation >= 100 || d.deviation === Infinity) {
-          return "url(#faded)";
-        } else {
-          return "rgb(221, 120, 62)";
-        }
-      });
-  })
+        })
+        .style("fill", (d) => {
+          if (d.deviation >= 100 || d.deviation === Infinity) {
+            return "url(#faded)";
+          } else {
+            return "rgb(221, 120, 62)";
+          }
+        });
+    })
   });
-
 }
 
 /* ----------------------------------------------------
