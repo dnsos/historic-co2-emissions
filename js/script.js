@@ -70,19 +70,19 @@ window.onload = () => {
     /* ----------------------------------------------------
     -- SVG VARIABLES */
     let svgWidth = 1350,
-        svgHeight = 950;
+        svgHeight = 1000;
 
     let cellWidth = svgWidth / selectedLocations[0].emissions.length,
         cellHeight = 50;
 
-    let color = chroma.scale(["white", "rgb(0, 0, 0)"]).domain([0, 57], "log");
+    let color = chroma.scale(["white", "black"]).domain([0, 57.7371], "log");
 
     let previousValue = selectedLocations[0].emissions[0];
 
     /* ----------------------------------------------------
     -- VIZ */
     let tooltip = d3.select(document.getElementById("viz")).append("div")
-      .attr("class", "tooltip")
+      .attr("class", "viz__tooltip")
       .style("opacity", 0);
 
     let svg = d3.select(document.getElementById("viz"))
@@ -168,10 +168,10 @@ window.onload = () => {
         return color(d.value);
       });
 
-    d3.select("#toggleDeviation").on("click", () => {
+    d3.select("#showDeviations").on("click", () => {
       d3.selectAll("rect")
         .transition()
-        .duration(500)
+        .duration(400)
         .attr("y", cellHeight / 2)
         .attr("height", (d) => {
           if (isNaN(d.deviation) || d.deviation == Number.POSITIVE_INFINITY || d.deviation == Number.NEGATIVE_INFINITY) {
@@ -201,6 +201,23 @@ window.onload = () => {
           } else {
             return "rgb(221, 120, 62)";
           }
+        });
+    })
+
+    d3.select("#showEmissions").on("click", () => {
+      d3.selectAll("rect")
+        .transition()
+        .duration(400)
+        .attr("y", 0)
+        .attr("width", cellWidth)
+        .attr("height", cellHeight)
+        .attr("transform", "translate(0,0)")
+        .style("stroke", (d) => {
+          return color(d.value);
+        })
+        .style("stroke-width", .2)
+        .style("fill", (d) => {
+          return color(d.value);
         });
     })
   });

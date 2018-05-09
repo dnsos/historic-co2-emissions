@@ -7,36 +7,38 @@ li {
   margin-bottom: .5rem;
 }
 
+.intro__wrapper {
+  display: block;
+  padding: 0 2rem;
+  margin: 0 auto;
+}
+
 #viz p {
   margin-bottom: 0;
 }
 
-section.graph {
+.viz__graph {
   padding: 2rem;
   background-color: white;
 }
 
-section.key {
+.viz__key {
   position: sticky;
   top: 0;
   padding: .8rem;
   background-color: rgb(248, 248, 248);
 }
 
-section.key p,
-section.key button {
+.viz__key p,
+.viz__key button {
   margin-bottom: 0;
 }
 
-section.key button {
+.viz__key button {
   margin-left: .8rem;
 }
 
-h1 {
-  color: rgb(102, 102, 102);
-}
-
-div.tooltip {
+.viz__tooltip {
   position: absolute;
   padding: .3rem;
   background-color: white;

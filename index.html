@@ -2,56 +2,62 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>CO2 data - multiple locations</title>
+    <title>Historic CO2 emissions in city centres</title>
     <link rel="stylesheet" href="css/lib/normalize.css">
     <link rel="stylesheet" href="css/lib/skeleton.css">
     <link rel="stylesheet" href="css/main.css">
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
     <script src="js/lib/d3.v4.js" type="text/javascript"></script>
     <script src="js/lib/chroma.min.js" type="text/javascript"></script>
   </head>
-  <body>
+  <body class="container">
 
-    <main class="container">
-
+    <header class="intro__wrapper">
       <section class="row">
-        <section class="ten columns">
-          <h1>Does humankind shape the amount of CO2 emissions?</h1>
-          <h3>An attempt to interpret correlations between CO2 emissions in city centres and historical events</h3>
-          <ul>
-            <li><span>Timespan: </span>1751 - 2012</li>
-            <li><span>Dataset: </span><a href="https://github.com/SensesProject/fhp-course-material/blob/master/data/C02_full_1751-2013.json">Historic CO2 emissions</a></li>
-            <li><span>Source: </span><a href="https://www.pik-potsdam.de/">Potsdam Institute for Climate Impact Research (PIK)</a></li>
-          </ul>
-          <h3>DATA</h3>
-          <p>Bla bla bla</p>
-          <h3>VISUAL ENCODING</h3>
-          <p>Cells indicate amount of annual CO2 emissions in gigatons of carbon (GtC) or deviation in percent</p>
-        </section>
-        <section class="two columns">
-          <p>SENSES project</p>
-        </section>
-      </section>
-
-      <section class="row key">
         <section class="twelve columns">
-          <p>Show: <button type="button" name="button">Emissions</button> <button type="button" name="showDeviation" id="toggleDeviation">Deviations</button></p>
+          <h1>Historic CO2 emissions in city centres</h1>
         </section>
       </section>
+      <section class="row">
+        <section class="four columns">
+          <h3>An attempt to visualise emission developments and interpret correlations with historic events</h3>
+          <p>A prototype developed as part of the class "Visualisierung von Klima-Szenarien" at the <a href="#">University of Applied Sciences Potsdam</a>  and within the <a href="#">SENSES</a> project.</p>
+        </section>
+        <section class="four columns">
+          <h3>Data</h3>
+          <p>The <a href="https://github.com/SensesProject/fhp-course-material/blob/master/data/C02_full_1751-2013.json">dataset</a> used is provided by the <a href="https://www.pik-potsdam.de/">Potsdam Institute for Climate Impact Research (PIK)</a> and contains CO2 emissions in gigatons of carbon[?] (GtC) from 1750 to 2012 in form of <a href="#">gridded data</a>. Cells for the different city centres were isolated and used in the visualisation.</p>
+        </section>
+        <section class="four columns">
+          <h3>Visual Encoding</h3>
+          <p>The visualisation consists of two views. One shows the EMISSIONS and uses a colour range from white to black to indicate the amount of emissions. The DEVIATIONS view indicates the annual deviation (in %) from the previous year and this way focusses on rapid increases and decreases in emissions.</p>
+        </section>
+      </section>
+    </header>
 
-      <section class="row graph">
+    <main>
+      <section class="row viz__key">
+        <section class="twelve columns">
+          <p>Show: <button autofocus type="button" name="showEmissions" id="showEmissions">Emissions</button><button type="button" name="showDeviations" id="showDeviations">Deviations</button></p>
+        </section>
+      </section>
+      <section class="row viz__graph">
         <section class="twelve columns" id="viz"></section>
       </section>
-
+    </main>
+    <footer>
       <section class="row">
         <section class="twelve columns">
           <p>* coordinates in database</p>
-          <p>Concept and Design: Hannah Schwan, Dennis Ostendorf</p>
-          <p>Development: Dennis Ostendorf</p>
+          <ul>
+            <li><span>Concept and Design: </span>Hannah Schwan and Dennis Ostendorf</li>
+            <li><span>Development: </span><a href="#">Dennis Ostendorf</a></li>
+            <li><span>Source code: </span>...</li>
+          </ul>
+          <p>A prototype developed as part of the class "Visualisierung von Klima-Szenarien" at the <a href="#">University of Applied Sciences Potsdam</a>  and within the <a href="#">SENSES</a> project.</p>
         </section>
       </section>
-
-    </main>
+    </footer>
 
     <script src="js/script.js" type="text/javascript"></script>
 
