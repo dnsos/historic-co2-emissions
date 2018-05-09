@@ -115,6 +115,10 @@
 
 /* Base Styles
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+::selection {
+    color: rgb(255, 255, 255);
+    background-color: rgb(118, 141, 155);
+}
 /* NOTE
 html is set to 62.5% so that all the REM measurements throughout Skeleton
 are based on 10px sizing. So basically 1.5rem = 15px :) */
@@ -163,7 +167,10 @@ p {
 /* Links
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 a {
-  color: inherit;; }
+  font-style: italic;
+  text-decoration: none;
+  color: rgb(110, 110, 110);
+  border-bottom: 1px solid rgb(221, 120, 62); }
 a:hover {
   color: rgb(221, 120, 62); }
 
@@ -177,7 +184,7 @@ input[type="reset"],
 input[type="button"] {
   display: inline-block;
   padding: 0;
-  color: inherit;
+  color: rgb(110, 110, 110);
   text-align: center;
   font-family: inherit;
   font-size: inherit;
@@ -201,7 +208,7 @@ button:focus,
 input[type="submit"]:focus,
 input[type="reset"]:focus,
 input[type="button"]:focus {
-  color: rgb(110, 110, 110);
+  color: rgb(221, 120, 62);
   border-color: #888;
   outline: 0; }
 .button.button-primary,
@@ -222,7 +229,7 @@ button.button-primary:focus,
 input[type="submit"].button-primary:focus,
 input[type="reset"].button-primary:focus,
 input[type="button"].button-primary:focus {
-  color: rgb(110, 110, 110);
+  color: rgb(221, 120, 62);
   background-color: #1EAEDB;
   border-color: #1EAEDB; }
 

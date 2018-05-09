@@ -70,7 +70,7 @@ window.onload = () => {
     /* ----------------------------------------------------
     -- SVG VARIABLES */
     let svgWidth = 1350,
-        svgHeight = 1000;
+        svgHeight = 900;
 
     let cellWidth = svgWidth / selectedLocations[0].emissions.length,
         cellHeight = 50;
@@ -142,7 +142,7 @@ window.onload = () => {
          .style("opacity", 1);
        tooltip.html(() => {
          //console.log("Test historical event:", selectedLocations[0].events[0]);
-         return "<p><span>" + (timespanStart + i) + "</span></p><p>Emissions: <span>" + d.value + "</span> GtC</p><p>Deviation: <span>" + displayedDeviation(d, i) + "</span> %";
+         return "<p><span>" + (timespanStart + i) + "</span></p><p>Emissions: <span>" + d.value + "</span> Gt</p><p>Deviation: <span>" + displayedDeviation(d, i) + "</span> %";
        })
          .style("left", (d3.event.pageX) + 20 + "px")
          .style("top", (d3.event.pageY - 80) + "px");
