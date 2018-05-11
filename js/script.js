@@ -6,13 +6,13 @@ window.onload = () => {
   -- GLOBAL VARIABLES */
   let timespanStart = 1751, timespanEnd = 2013,
       selectedLocations = [
-        {location: "Berlin", coordinates: [193,37], events: ["In 1945 Germany was defeated in WW2. Industry was ...", "Event 2"]},
-        {location: "London", coordinates: [179,38]},
-        {location: "Shanghai", coordinates: [301,58]},
-        {location: "New York A", coordinates: [105,48]},
-        {location: "New York B", coordinates: [106,49]},
-        {location: "Moscow", coordinates: [217,34]},
-        {location: "São Paulo", coordinates: [133,113]}
+        {location: "Berlin", coordinates: [193,37], events: [{year: 1945, description: "In 1945 Germany was defeated in WW2. Industry was ..."}, {year: 1991, description: "Test event, test event"}]},
+        {location: "London", coordinates: [179,38], events: []},
+        {location: "Shanghai", coordinates: [301,58], events: []},
+        {location: "New York A", coordinates: [105,48], events: []},
+        {location: "New York B", coordinates: [106,49], events: []},
+        {location: "Moscow", coordinates: [217,34], events: []},
+        {location: "São Paulo", coordinates: [133,113], events: []}
       ];
 
   /*
@@ -142,7 +142,7 @@ window.onload = () => {
          .style("opacity", 1);
        tooltip.html(() => {
          //console.log("Test historical event:", selectedLocations[0].events[0]);
-         return "<p><span>" + (timespanStart + i) + "</span></p><p>Emissions: <span>" + d.value + "</span> Gt</p><p>Deviation: <span>" + displayedDeviation(d, i) + "</span> %";
+         return "<p><span>" + (timespanStart + i) + "</span></p><p>Emissions: <span>" + d.value + "</span> GtC</p><p>Deviation: <span>" + displayedDeviation(d, i) + "</span> %";
        })
          .style("left", (d3.event.pageX) + 20 + "px")
          .style("top", (d3.event.pageY - 80) + "px");
@@ -167,6 +167,19 @@ window.onload = () => {
       .style("fill", (d) => {
         return color(d.value);
       });
+
+    let markers = grid.selectAll("circle")
+      .data((d) => {
+        return d.events
+      })
+      .enter()
+      .append("circle")
+      .attr("cx", (d, i) => {
+        return cellWidth * (d.year - timespanStart) + cellWidth / 2;
+      })
+      .attr("cy", cellHeight + 10)
+      .attr("r", cellWidth / 2)
+      .style("fill", "rgb(221, 120, 62)");
 
     d3.select("#showDeviations").on("click", () => {
       d3.selectAll("rect")
