@@ -26,7 +26,7 @@ window.onload = () => {
 
   /* ----------------------------------------------------
   -- DATA */
-  d3.json('data/C02_full_1751-2013.json', (err, data) => {
+  d3.json("data/C02_full_1751-2013.json", (err, data) => {
 
     // helper logs
     console.log("Total timespan: ", data.startYear, "-", data.startYear + data.data.length);
